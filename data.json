@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-18T11:06+01:00",
+ "updatedAt": "2026-10-18T17:30+01:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -147,6 +147,76 @@
    "player": "Tyler Yanagida",
    "timeSeconds": 22,
    "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Tango",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 47,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Tango",
+   "player": "Sophie Evans",
+   "timeSeconds": 54,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Tango",
+   "player": "Lucie Day",
+   "timeSeconds": 81,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Zip",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 12,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Zip",
+   "player": "Lucie Day",
+   "timeSeconds": 18,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Zip",
+   "player": "Sophie Evans",
+   "timeSeconds": 41,
+   "hints": true
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Mini Sudoku",
+   "player": "Lucie Day",
+   "timeSeconds": 62,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Patches",
+   "player": "Lucie Day",
+   "timeSeconds": 15,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Patches",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 29,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Patches",
+   "player": "Sophie Evans",
+   "timeSeconds": 78,
+   "hints": true
   }
  ]
 }
