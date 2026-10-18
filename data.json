@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-17T18:50+01:00",
+ "updatedAt": "2026-10-18T11:06+01:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -118,6 +118,34 @@
    "game": "Patches",
    "player": "Lucie Day",
    "timeSeconds": 34,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Tango",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 51,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Zip",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 44,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Mini Sudoku",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 208,
+   "hints": false
+  },
+  {
+   "date": "2026-10-18",
+   "game": "Patches",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 22,
    "hints": false
   }
  ]
