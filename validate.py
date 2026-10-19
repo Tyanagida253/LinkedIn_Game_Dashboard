@@ -12,4 +12,8 @@ for i,s in enumerate(d["scores"]):
     if not isinstance(t,int) or not 1<=t<=3600: errs.append(f"#{i} implausible time {t}")
     if k in seen: errs.append(f"#{i} duplicate {k}")
     seen.add(k)
+days = {}
+for s in d["scores"]: days.setdefault(s["date"], []).append(bool(s.get("hints")))
+for day, h in sorted(days.items()):  # warning only: this pattern is what a hint-detection bug looks like
+    if len(h) >= 6 and sum(h) > len(h) / 2: print(f"WARNING: {day}: {sum(h)} of {len(h)} scores marked as hints. Check against the leaderboards.")
 print("\n".join(errs) or f"OK: {len(seen)} scores"); sys.exit(bool(errs))
