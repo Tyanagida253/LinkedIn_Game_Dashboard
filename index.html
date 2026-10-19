@@ -1,150 +1,94 @@
 <!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Minigame Standings</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<style>
-/* Layout: header + game tabs, then leaderboard / trend chart / per-player stats, entry form and recent log below */
-:root{--bg:#f6f7f9;--panel:#fff;--fg:#14202b;--mute:#5d6b78;--line:#dfe4ea;--accent:#0a66c2;--good:#1a7f4b;
---p0:#0a66c2;--p1:#d9480f;--p2:#2f9e44;--p3:#9c36b5;--p4:#e0a100;--p5:#0c8599;--p6:#c2255c;--p7:#5f6b7a;
---sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171e;--panel:#18222c;--fg:#e8edf2;--mute:#93a1ae;--line:#2a3743;--accent:#58a6f0;--good:#4cc38a;
---p0:#58a6f0;--p1:#ff8a4c;--p2:#5fd07a;--p3:#d08af0;--p4:#f2c94c;--p5:#4cd0e6;--p6:#f27ba5;--p7:#a3afbc;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#10171e;--panel:#18222c;--fg:#e8edf2;--mute:#93a1ae;--line:#2a3743;--accent:#58a6f0;--good:#4cc38a;
---p0:#58a6f0;--p1:#ff8a4c;--p2:#5fd07a;--p3:#d08af0;--p4:#f2c94c;--p5:#4cd0e6;--p6:#f27ba5;--p7:#a3afbc;color-scheme:dark}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:15px/1.45 var(--sans);padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-main{max-width:980px;margin:0 auto;display:grid;gap:16px}
-h1{font-size:1.6rem;margin:0;text-wrap:balance}h2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 10px}
-.sub{color:var(--mute);margin:2px 0 0}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-button,input,select{font:inherit;color:inherit}
-.tab{border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:6px;cursor:pointer}
-.tab[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;min-width:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
-.scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{color:var(--mute);font-weight:500;font-size:.8rem}
-td.n,th.n{text-align:right;font-family:var(--mono)}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
-.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;margin-top:6px}
-svg text{fill:var(--mute);font:11px var(--mono)}
-form{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
-label{display:grid;gap:3px;font-size:.8rem;color:var(--mute)}
-input,select{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
-.go{background:var(--accent);color:var(--bg);border:0;border-radius:6px;padding:8px 16px;cursor:pointer;font-weight:600}
-.x{background:none;border:0;color:var(--mute);cursor:pointer}
-.empty{color:var(--mute)}.msg{color:var(--mute);font-size:.85rem;width:100%}
-</style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
 
 <main>
-<header><h1>Minigame Standings</h1><p class="sub">LinkedIn Queens, Tango, Zip and friends. Fastest time of the day wins; ties share it. A hint adds 60s.</p>
-<p class="sub" id="ust"></p></header>
-<nav class="tabs" id="tabs" aria-label="Game"></nav>
-<div class="legend" id="gf" style="margin:0"></div>
-<section class="panel"><h2 id="lbT">Leaderboard</h2><div class="scroll" id="lb"></div></section>
-<div class="grid">
-<section class="panel"><h2>Time trend</h2><div id="chart"></div><div class="legend" id="legend"></div></section>
-<section class="panel"><h2>Streaks and personal bests</h2><div class="scroll" id="streaks"></div></section>
-</div>
+<header>
+<h1>Minigame standings</h1>
+<p class="sub">LinkedIn Queens, Tango, Zip and friends. The fastest time wins each puzzle each day, and ties share the win. A hint adds 60 seconds.</p>
+<p class="sub" id="ust"></p>
+</header>
+<div class="filters" id="filters"></div>
+<section aria-label="Wins by player"><div class="podium" id="podium"></div></section>
+<section class="panel"><h2>Daily results</h2><div class="scroll" id="rg"></div></section>
+<section class="panel"><h2>Standings</h2><div class="scroll" id="lb"></div></section>
+<section class="panel">
+<div class="panel-h"><h2>Time trend</h2><label>Game <select id="cg"></select></label></div>
+<div id="chart"></div>
+</section>
 <section class="panel"><h2>Recent scores</h2><div class="scroll" id="log"></div></section>
 </main>
 
+<script src="shared.js"></script>
 <script>
-const GAMES=["Queens","Tango","Zip","Crossclimb","Pinpoint","Mini Sudoku","Wend","Patches"];
-const PLAYERS=["Tyler Yanagida","Oscar Gidley-Kitchin","Sophie Evans","Lucie Day"];
-let game="All",scores=[];
-const $=id=>document.getElementById(id);
-let sel=new Set(GAMES);
-try{const v=JSON.parse(localStorage.getItem("sel"));if(Array.isArray(v))sel=new Set(v.filter(g=>GAMES.includes(g)))}catch(e){}
-const fmt=s=>Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0");
-const day=d=>Date.parse(d+"T00:00:00Z")/864e5;
-const el=(t,txt,cls)=>{const e=document.createElement(t);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;return e};
-const players=()=>PLAYERS;
-const pc=(p,all)=>"var(--p"+(all.indexOf(p)%8)+")";
-
-// wins per player: fastest time per (date,game) group, ties share
-function winsBy(rows){
-  const g={},w={};
-  rows.forEach(s=>{const k=s.date+"|"+s.game;(g[k]=g[k]||[]).push(s)});
-  Object.values(g).forEach(a=>{if(a.length<2)return;const m=Math.min(...a.map(s=>s.timeSeconds));a.filter(s=>s.timeSeconds===m).forEach(s=>w[s.player]=(w[s.player]||0)+1)});
-  return w;
-}
-function streaks(p){ // consecutive days with any score
-  const ds=[...new Set(scores.filter(s=>s.player===p).map(s=>day(s.date)))].sort((a,b)=>a-b);
-  let best=0,run=0,prev=null;
-  ds.forEach(d=>{run=prev!=null&&d===prev+1?run+1:1;best=Math.max(best,run);prev=d});
-  const today=Math.floor(Date.now()/864e5);
-  return{cur:ds.length&&today-prev<=1?run:0,best};
-}
-function table(host,heads,rows,empty){
-  host.replaceChildren();
-  if(!rows.length){host.append(el("p",empty,"empty"));return}
-  const t=el("table"),tr=el("tr");
-  heads.forEach((h,i)=>tr.append(el("th",h,i?"n":"")));
-  t.append(tr);
-  rows.forEach(r=>{const tr=el("tr");r.forEach((c,i)=>{const td=el("td",null,i?"n":"");if(c instanceof Node)td.append(c);else td.textContent=c;tr.append(td)});t.append(tr)});
-  host.append(t);
-}
-function who(p,all){const s=el("span");s.append(el("span","","dot"));s.firstChild.style.background=pc(p,all);s.append(p);return s}
+let scores=[],chartGame=null,first=true;
 
 function render(){
-  const all=players(),rows=game==="All"?scores.filter(s=>sel.has(s.game)):scores.filter(s=>s.game===game);
-  $("gf").replaceChildren(...(game==="All"?[el("span","Games included:")].concat(GAMES.map(g=>{
-    const l=el("label"),c=el("input");l.style.cssText="display:flex;align-items:center;gap:4px;font-size:.85rem;color:var(--fg)";
-    c.type="checkbox";c.checked=sel.has(g);
-    c.onchange=()=>{c.checked?sel.add(g):sel.delete(g);try{localStorage.setItem("sel",JSON.stringify([...sel]))}catch(e){}render()};
-    l.append(c,g);return l})):[]));
-  $("tabs").replaceChildren(...["All",...GAMES].map(g=>{const b=el("button",g==="All"?"Overall":g,"tab");b.setAttribute("aria-pressed",g===game);b.onclick=()=>{game=g;render()};return b}));
-  $("lbT").textContent=(game==="All"?"Overall":game)+" leaderboard";
+  const rows=applyFilters(scores),rr=ranked(rows),by=p=>rr.filter(r=>r.player===p);
+  const st=PLAYERS.map(p=>({p,...stats(by(p))})).sort((a,b)=>b.wins-a.wins||(a.pos??99)-(b.pos??99)||(a.avg??1e9)-(b.avg??1e9));
 
-  const w=winsBy(rows),contested=Object.keys(rows.reduce((a,s)=>(a[s.date+"|"+s.game]=(a[s.date+"|"+s.game]||0)+1,a),{})).length;
-  const lb=all.map(p=>{
-    const mine=rows.filter(s=>s.player===p);if(!mine.length)return null;
-    const avg=mine.reduce((a,s)=>a+s.timeSeconds,0)/mine.length;
-    return{p,wins:w[p]||0,n:mine.length,avg,best:Math.min(...mine.map(s=>s.timeSeconds))}}).filter(Boolean).sort((a,b)=>b.wins-a.wins||a.avg-b.avg);
-  table($("lb"),["Player","Wins","Played","Win rate","Avg time","Best"],
-    lb.map(r=>[who(r.p,all),r.wins,r.n,Math.round(100*r.wins/r.n)+"%",fmt(r.avg),fmt(r.best)]),"No scores yet. Add the first one below.");
+  // podium: column height follows wins
+  const top=Math.max(1,...st.map(s=>s.wins));
+  $("podium").replaceChildren(...st.map(s=>{
+    const a=el("a",null,"pod");a.href=playerHref(s.p);a.style.setProperty("--c",pc(s.p));
+    a.style.setProperty("--h",(130+110*s.wins/top)+"px");
+    const n=el("div",s.wins,"pod-n");n.append(el("small",s.wins===1?"win":"wins"));
+    const m=el("div",null);m.append(el("div",s.p,"pod-name"),el("div",s.n?(s.rate==null?"No head-to-head yet":Math.round(100*s.rate)+"% win rate, "+s.pos.toFixed(1)+" avg position"):"No scores in range","pod-meta"));
+    a.append(n,m);return a}));
 
-  table($("streaks"),["Player","Streak","Longest","Bests"],
-    all.map(p=>{const s=streaks(p),bests=GAMES.map(g=>{const t=scores.filter(x=>x.player===p&&x.game===g).map(x=>x.timeSeconds);return t.length?g+" "+fmt(Math.min(...t)):null}).filter(Boolean).join(" · ");
-      return[who(p,all),s.cur+"d",s.best+"d",bests||"-"]}),"Streaks appear once scores are in.");
-  $("streaks").querySelectorAll("td:last-child").forEach(td=>{td.style.whiteSpace="normal";td.style.textAlign="left";td.style.fontFamily="var(--sans)"});
+  resultsGrid(rr);
 
-  chart(rows,all);
-  const recent=[...scores].sort((a,b)=>b.date.localeCompare(a.date)||a.game.localeCompare(b.game)).slice(0,25);
-  table($("log"),["Date","Game","Player","Time"],recent.map(s=>[s.date,s.game,s.player,fmt(s.timeSeconds)+(s.hints?" (hint)":"")]),"Nothing logged yet.");
-  $("log").querySelectorAll("td").forEach((td,i)=>{if(i%4<3)td.style.textAlign="left"});
+  table($("lb"),["Player","Wins","Played","Win rate","Avg position","Avg time","Best","Streak"],
+    st.filter(s=>s.n).map(s=>[who(s.p,true),s.wins,s.n,s.rate==null?NONE:Math.round(100*s.rate)+"%",s.pos==null?NONE:s.pos.toFixed(2),fmt(s.avg),fmt(s.best),s.cur+"d"]),EMPTY);
+
+  // chart game picker follows the game filter
+  const gs=GAMES.filter(g=>filters.games.has(g));
+  if(!gs.includes(chartGame))chartGame=[...gs].sort((a,b)=>rows.filter(r=>r.game===b).length-rows.filter(r=>r.game===a).length)[0];
+  const sel=$("cg");sel.replaceChildren(...gs.map(g=>{const o=el("option",g);o.value=g;return o}));sel.value=chartGame;
+  sel.onchange=()=>{chartGame=sel.value;chart(rows)};
+  chart(rows);
+
+  const recent=[...rows].sort((a,b)=>b.date.localeCompare(a.date)||a.game.localeCompare(b.game)||eff(a)-eff(b)).slice(0,25);
+  table($("log"),["Date","Game","Player","Time"],recent.map(s=>{
+    const t=el("span",fmt(s.timeSeconds));if(s.hints)t.append(el("span"," + "+HINT_PENALTY+"s hint = "+fmt(eff(s)),"hint"));
+    return[s.date,s.game,who(s.player,true),t]}),EMPTY,3);
+  $("log").querySelectorAll("td:last-child,th:last-child").forEach(c=>{c.classList.remove("n")});
 }
 
-function chart(rows,all){
-  const host=$("chart"),lg=$("legend");host.replaceChildren();lg.replaceChildren();
-  if(game==="All"){host.append(el("p","Pick a game to see times over time.","empty"));return}
-  if(rows.length<2){host.append(el("p","Needs at least two scores for this game.","empty"));return}
-  const W=480,H=240,L=40,R=12,T=10,B=26,ds=rows.map(s=>day(s.date)),x0=Math.min(...ds),x1=Math.max(...ds),
-    ts=rows.map(s=>s.timeSeconds),y0=0,y1=Math.max(...ts)*1.1,
-    X=d=>L+(x1===x0?(W-L-R)/2:(d-x0)/(x1-x0)*(W-L-R)),Y=t=>H-B-(t-y0)/(y1-y0)*(H-B-T);
-  const ns="http://www.w3.org/2000/svg",mk=(n,a,txt)=>{const e=document.createElementNS(ns,n);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e};
-  const svg=mk("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",role:"img","aria-label":"Times by date per player"});
-  for(let i=0;i<=4;i++){const t=y1*i/4,y=Y(t);svg.append(mk("line",{x1:L,x2:W-R,y1:y,y2:y,stroke:"var(--line)"}),mk("text",{x:L-6,y:y+4,"text-anchor":"end"},fmt(t)))}
-  [x0,x1].forEach((d,i)=>svg.append(mk("text",{x:X(d),y:H-8,"text-anchor":i?"end":"start"},new Date(d*864e5).toISOString().slice(5,10))));
-  all.forEach(p=>{
-    const pts=rows.filter(s=>s.player===p).sort((a,b)=>a.date.localeCompare(b.date));if(!pts.length)return;
-    const c=pc(p,all);
-    svg.append(mk("polyline",{points:pts.map(s=>X(day(s.date))+","+Y(s.timeSeconds)).join(" "),fill:"none",stroke:c,"stroke-width":2}));
-    pts.forEach(s=>{const d=mk("circle",{cx:X(day(s.date)),cy:Y(s.timeSeconds),r:3.5,fill:c});d.append(mk("title",{},`${p} ${s.date} ${fmt(s.timeSeconds)}`));svg.append(d)});
-    lg.append(who(p,all));
+function resultsGrid(rr){
+  const host=$("rg"),days=[...new Set(rr.map(r=>r.date))].sort(),gs=GAMES.filter(g=>filters.games.has(g));
+  host.replaceChildren();
+  if(!days.length){host.append(el("p",EMPTY,"empty"));return}
+  const g=el("div",null,"rg"+(first?" reveal":""));g.style.setProperty("--days",days.length);
+  g.append(el("span"));
+  days.forEach(d=>g.append(el("span",dlabel(day(d)),"rg-h")));
+  PLAYERS.forEach(p=>{
+    const n=el("span",null,"rg-n");n.append(who(p,true));g.append(n);
+    days.forEach((d,i)=>{
+      const c=el("div",null,"cl");c.style.setProperty("--cols",Math.min(3,gs.length));
+      gs.forEach(game=>{const t=tile(rr.find(r=>r.player===p&&r.date===d&&r.game===game),game);t.style.setProperty("--i",i);c.append(t)});
+      g.append(c)});
   });
-  host.append(svg);
+  host.append(g,rankLegend(),el("p","Tiles run left to right, then down, in this order: "+gs.join(", ")+". The number is the finishing position that day.","order"));
+  host.scrollLeft=host.scrollWidth;
+  first=false;
 }
 
+function chart(rows){
+  const mine=rows.filter(s=>s.game===chartGame);
+  lineChart($("chart"),PLAYERS.map(p=>({name:p,color:pc(p),
+    pts:mine.filter(s=>s.player===p).map(s=>({x:day(s.date),y:eff(s),tip:`${p}, ${s.date}: ${fmt(eff(s))}${s.hints?" (with hint)":""}`}))})).filter(s=>s.pts.length),
+    "Times by date per player for "+chartGame);
+}
+
+filterBar($("filters"),render);
 render();
-fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(j=>{
-  scores=j.scores.filter(r=>PLAYERS.includes(r.player)&&r.timeSeconds>0);
-  $("ust").textContent="Last updated "+new Date(j.updatedAt).toLocaleString();render()
-}).catch(()=>$("ust").textContent="Could not load data.json (open the page from a web server, not a local file).");
+loadData().then(d=>{scores=d.scores;$("ust").textContent="Last updated "+new Date(d.updatedAt).toLocaleString();first=true;render()})
+  .catch(()=>$("ust").textContent=LOAD_ERR);
 </script>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Player · Minigame Standings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+
+<main>
+<header>
+<a class="back" id="back" href="index.html">Back to standings</a>
+<h1 id="name"></h1>
+<p class="sub" id="ust"></p>
+</header>
+<div id="missing" hidden class="panel"><h2>Player not found</h2><p class="empty">Pick a player from the standings.</p></div>
+<div class="filters" id="filters"></div>
+<div id="body" style="display:grid;gap:20px">
+<section class="stats" id="stats" aria-label="Summary"></section>
+<section class="panel"><h2>Daily results</h2><div class="scroll" id="rg"></div></section>
+<section class="panel"><h2>By game</h2><div class="scroll" id="games"></div></section>
+<div class="grid">
+<section class="panel">
+<div class="panel-h"><h2>Time trend</h2><label>Game <select id="cg"></select></label></div>
+<div id="chart"></div>
+</section>
+<section class="panel"><h2>Head to head</h2><div class="scroll" id="h2h"></div></section>
+</div>
+<section class="panel"><h2>Recent results</h2><div class="scroll" id="log"></div></section>
+</div>
+</main>
+
+<script src="shared.js"></script>
+<script>
+const P=new URLSearchParams(location.search).get("p");
+let scores=[],chartGame=null,first=true;
+
+function render(){
+  const rows=applyFilters(scores),rr=ranked(rows),mine=rr.filter(r=>r.player===P),s=stats(mine);
+  $("back").href="index.html"+(filterParams().toString()?"?"+filterParams():"");
+  if(!mine.length){
+    $("body").querySelectorAll("section,div.grid").forEach(x=>x.hidden=true);
+    let m=$("none");if(!m){m=el("p",EMPTY,"empty");m.id="none";$("body").append(m)}m.hidden=false;return;
+  }
+  const none=$("none");if(none)none.hidden=true;
+  $("body").querySelectorAll("section,div.grid").forEach(x=>x.hidden=false);
+
+  const stat=(v,l)=>{const d=el("div",null,"stat");d.style.setProperty("--c",pc(P));d.append(el("b",v),el("span",l));return d};
+  $("stats").replaceChildren(
+    stat(s.wins,"Wins"),stat(s.rate==null?NONE:Math.round(100*s.rate)+"%","Win rate"),
+    stat(s.pos==null?NONE:s.pos.toFixed(2),"Average position"),stat(fmt(s.avg),"Average time"),
+    stat(fmt(s.best),"Best time"),stat(s.n,"Puzzles played"),stat(s.cur+"d / "+s.longest+"d","Streak now / longest"));
+
+  // daily results: one row per game, one tile per day
+  const days=[...new Set(rr.map(r=>r.date))].sort(),gs=GAMES.filter(g=>filters.games.has(g)),host=$("rg");
+  host.replaceChildren();
+  const g=el("div",null,"rg"+(first?" reveal":""));g.style.setProperty("--days",days.length);
+  g.append(el("span"));days.forEach(d=>g.append(el("span",dlabel(day(d)),"rg-h")));
+  gs.forEach(game=>{
+    const n=el("span",game,"rg-n");g.append(n);
+    days.forEach((d,i)=>{const c=el("div",null,"cl one"),t=tile(mine.find(r=>r.date===d&&r.game===game),game);t.style.setProperty("--i",i);c.append(t);g.append(c)});
+  });
+  host.append(g,rankLegend());host.scrollLeft=host.scrollWidth;first=false;
+
+  table($("games"),["Game","Played","Wins","Avg position","Avg time","Best"],
+    gs.map(game=>{const m=mine.filter(r=>r.game===game);if(!m.length)return null;const x=stats(m);
+      return[game,x.n,x.wins,x.pos==null?NONE:x.pos.toFixed(2),fmt(x.avg),fmt(x.best)]}).filter(Boolean),EMPTY);
+
+  const cg=GAMES.filter(x=>filters.games.has(x)&&mine.some(r=>r.game===x));
+  if(!cg.includes(chartGame))chartGame=[...cg].sort((a,b)=>mine.filter(r=>r.game===b).length-mine.filter(r=>r.game===a).length)[0];
+  const sel=$("cg");sel.replaceChildren(...cg.map(x=>{const o=el("option",x);o.value=x;return o}));sel.value=chartGame;
+  sel.onchange=()=>{chartGame=sel.value;chart(rr)};
+  chart(rr);
+
+  // head to head: shared puzzles where both players have a time
+  const h=PLAYERS.filter(o=>o!==P).map(o=>{
+    let w=0,l=0,t=0;
+    mine.forEach(r=>{const x=rr.find(y=>y.player===o&&y.date===r.date&&y.game===r.game);if(!x)return;r.t<x.t?w++:r.t>x.t?l++:t++});
+    return[who(o,true),w+l+t,w,l,t]}).filter(r=>r[1]);
+  table($("h2h"),["Opponent","Shared","Won","Lost","Tied"],h,"No shared puzzles with other players in this range.");
+
+  const recent=[...mine].sort((a,b)=>b.date.localeCompare(a.date)||a.game.localeCompare(b.game)).slice(0,25);
+  table($("log"),["Date","Game","Time","Position"],recent.map(r=>{
+    const t=el("span",fmt(r.timeSeconds));if(r.hints)t.append(el("span"," + "+HINT_PENALTY+"s hint = "+fmt(eff(r)),"hint"));
+    return[r.date,r.game,t,r.rank?ord(r.rank)+" of "+r.n:"Played alone"]}),EMPTY,3);
+}
+
+function chart(rr){
+  const g=rr.filter(r=>r.game===chartGame),mine=g.filter(r=>r.player===P),days=[...new Set(mine.map(r=>r.date))];
+  const others=days.map(d=>{const o=g.filter(r=>r.date===d&&r.player!==P);return o.length?{x:day(d),y:avg(o.map(r=>r.t)),tip:`Others, ${d}: ${fmt(avg(o.map(r=>r.t)))}`}:null}).filter(Boolean);
+  lineChart($("chart"),[
+    {name:P,color:pc(P),pts:mine.map(r=>({x:day(r.date),y:r.t,tip:`${P}, ${r.date}: ${fmt(r.t)}${r.hints?" (with hint)":""}`}))},
+    {name:"Average of the others",color:"var(--mute)",dash:true,pts:others}],
+    "Times by date for "+P+" against the average of the others in "+chartGame);
+}
+
+if(!PLAYERS.includes(P)){
+  $("name").textContent="Player not found";$("missing").hidden=false;$("body").hidden=true;$("filters").hidden=true;
+}else{
+  document.title=P+" · Minigame Standings";
+  $("name").textContent=P;
+  const mark=el("span","","dot");mark.style.cssText="display:inline-block;width:.45em;height:.45em;margin-right:.3em;background:"+pc(P);$("name").prepend(mark);
+  filterBar($("filters"),render);
+  loadData().then(d=>{scores=d.scores;$("ust").textContent="Last updated "+new Date(d.updatedAt).toLocaleString();first=true;render()})
+    .catch(()=>$("ust").textContent=LOAD_ERR);
+}
+</script>
