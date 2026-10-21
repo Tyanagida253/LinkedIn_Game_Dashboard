@@ -1,0 +1,5 @@
+.browser-profile/
+page-dump.*
+.last-run
+.venv/
+.data.json.bak
