@@ -1,6 +1,6 @@
 # LinkedIn Game Dashboard
 
-Standings for LinkedIn's daily puzzles (Queens, Tango, Zip, Mini Sudoku, Wend, Patches) among four players.
+Standings for LinkedIn's daily puzzles (Queens, Tango, Zip, Mini Sudoku, Wend, Patches) among five players.
 
 - `index.html`: standings, daily results grid, time trend, recent scores.
 - `player.html?p=<name>`: one player's wins, average position, average time and more. Opened by clicking a name.

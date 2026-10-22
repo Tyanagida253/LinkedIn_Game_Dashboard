@@ -1,6 +1,6 @@
 // Shared by index.html and player.html: constants, scoring, filters, small renderers.
 const GAMES=["Queens","Tango","Zip","Mini Sudoku","Wend","Patches"];
-const PLAYERS=["Tyler Yanagida","Oscar Gidley-Kitchin","Sophie Evans","Lucie Day"];
+const PLAYERS=["Tyler Yanagida","Oscar Gidley-Kitchin","Sophie Evans","Lucie Day","Jacob Hansson"];
 const HINT_PENALTY=60;
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const $=id=>document.getElementById(id);

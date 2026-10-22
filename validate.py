@@ -1,7 +1,7 @@
 # Run before committing: python3 validate.py
 import json,re,sys
 GAMES={"Queens","Tango","Zip","Mini Sudoku","Wend","Patches"}
-PLAYERS={"Tyler Yanagida","Oscar Gidley-Kitchin","Sophie Evans","Lucie Day"}
+PLAYERS={"Tyler Yanagida","Oscar Gidley-Kitchin","Sophie Evans","Lucie Day","Jacob Hansson"}
 d=json.load(open("data.json")); seen=set(); errs=[]
 for i,s in enumerate(d["scores"]):
     k=(s.get("date"),s.get("game"),s.get("player"))

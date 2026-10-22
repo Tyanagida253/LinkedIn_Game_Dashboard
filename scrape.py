@@ -6,7 +6,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 GAMES = {"queens": "Queens", "tango": "Tango", "zip": "Zip", "mini-sudoku": "Mini Sudoku", "wend": "Wend", "patches": "Patches"}
-PLAYERS = {"You": "Tyler Yanagida", "Oscar Gidley-Kitchin": "Oscar Gidley-Kitchin", "Sophie Evans": "Sophie Evans", "Lucie Day": "Lucie Day"}
+PLAYERS = {"You": "Tyler Yanagida", "Oscar Gidley-Kitchin": "Oscar Gidley-Kitchin", "Sophie Evans": "Sophie Evans", "Lucie Day": "Lucie Day", "Jacob Hansson": "Jacob Hansson"}
 LAST_RUN, MIN_GAP_H = Path(".last-run"), 20
 TIME = re.compile(r"^(?:(\d+):(\d\d)|-:--)$")
 KNOWN_BADGE = re.compile(r"no hints|no mistakes|no backtracks|no redraws|top \d+%|win by win", re.I)
@@ -104,7 +104,7 @@ def main():
             if not btn.count():
                 print(f"{game}: no leaderboard button (not played today?), skipping")
             else:
-                time.sleep(random.uniform(5, 15))
+                time.sleep(random.uniform(2, 4))
                 btn.first.click()
                 page.wait_for_timeout(4000)
                 if blocked(page):
@@ -117,7 +117,7 @@ def main():
                     sys.exit(f"{game}: leaderboard parsed to zero rows. Page layout may have changed; nothing written.")
                 found += [{"date": today, "game": game, "player": n, "timeSeconds": s, "hints": h} for n, s, h in rows]
                 print(f"{game}: {len(rows)} scores")
-            time.sleep(random.uniform(5, 15))
+            time.sleep(random.uniform(2, 4))
         ctx.close()
     if not found:
         sys.exit("No scores found for any game; data.json untouched.")
