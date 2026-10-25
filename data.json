@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-24T20:18+01:00",
+ "updatedAt": "2026-10-25T20:44+00:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -1008,6 +1008,104 @@
    "player": "Tyler Yanagida",
    "timeSeconds": 23,
    "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Queens",
+   "player": "Lucie Day",
+   "timeSeconds": 110,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Queens",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 166,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Tango",
+   "player": "Sophie Evans",
+   "timeSeconds": 22,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Tango",
+   "player": "Lucie Day",
+   "timeSeconds": 28,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Tango",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 30,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Zip",
+   "player": "Lucie Day",
+   "timeSeconds": 72,
+   "hints": true
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Zip",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 89,
+   "hints": true
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Mini Sudoku",
+   "player": "Lucie Day",
+   "timeSeconds": 124,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Mini Sudoku",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 598,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Wend",
+   "player": "Lucie Day",
+   "timeSeconds": 62,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Wend",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 183,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Patches",
+   "player": "Sophie Evans",
+   "timeSeconds": 23,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Patches",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 44,
+   "hints": false
+  },
+  {
+   "date": "2026-10-25",
+   "game": "Patches",
+   "player": "Lucie Day",
+   "timeSeconds": 109,
+   "hints": true
   }
  ]
 }
