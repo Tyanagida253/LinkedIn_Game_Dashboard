@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-25T20:44+00:00",
+ "updatedAt": "2026-10-26T22:26+00:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -1106,6 +1106,167 @@
    "player": "Lucie Day",
    "timeSeconds": 109,
    "hints": true
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Queens",
+   "player": "Jacob Hansson",
+   "timeSeconds": 16,
+   "hints": true
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Queens",
+   "player": "Lucie Day",
+   "timeSeconds": 17,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Queens",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 17,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Queens",
+   "player": "Sophie Evans",
+   "timeSeconds": 18,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Queens",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 40,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Tango",
+   "player": "Lucie Day",
+   "timeSeconds": 23,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Tango",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 24,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Tango",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 27,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Tango",
+   "player": "Sophie Evans",
+   "timeSeconds": 36,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Zip",
+   "player": "Lucie Day",
+   "timeSeconds": 4,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Zip",
+   "player": "Sophie Evans",
+   "timeSeconds": 5,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Zip",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 5,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Zip",
+   "player": "Jacob Hansson",
+   "timeSeconds": 7,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Zip",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 8,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Mini Sudoku",
+   "player": "Lucie Day",
+   "timeSeconds": 23,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Mini Sudoku",
+   "player": "Sophie Evans",
+   "timeSeconds": 37,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Mini Sudoku",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 85,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Wend",
+   "player": "Lucie Day",
+   "timeSeconds": 15,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Wend",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 43,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Patches",
+   "player": "Sophie Evans",
+   "timeSeconds": 5,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Patches",
+   "player": "Lucie Day",
+   "timeSeconds": 5,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Patches",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 8,
+   "hints": false
+  },
+  {
+   "date": "2026-10-26",
+   "game": "Patches",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 10,
+   "hints": false
   }
  ]
 }
