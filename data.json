@@ -1364,7 +1364,7 @@
    "game": "Mini Sudoku",
    "player": "Tyler Yanagida",
    "timeSeconds": 37,
-   "hints": true
+   "hints": false
   },
   {
    "date": "2026-10-27",
