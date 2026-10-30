@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-28T21:48+00:00",
+ "updatedAt": "2026-10-30T21:30+00:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -1560,6 +1560,118 @@
    "game": "Patches",
    "player": "Lucie Day",
    "timeSeconds": 14,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Queens",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 54,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Queens",
+   "player": "Lucie Day",
+   "timeSeconds": 60,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Tango",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 22,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Tango",
+   "player": "Sophie Evans",
+   "timeSeconds": 22,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Tango",
+   "player": "Lucie Day",
+   "timeSeconds": 22,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Tango",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 30,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Zip",
+   "player": "Lucie Day",
+   "timeSeconds": 16,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Zip",
+   "player": "Oscar Gidley-Kitchin",
+   "timeSeconds": 20,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Zip",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 33,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Mini Sudoku",
+   "player": "Lucie Day",
+   "timeSeconds": 33,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Mini Sudoku",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 67,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Wend",
+   "player": "Lucie Day",
+   "timeSeconds": 23,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Wend",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 35,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Patches",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 13,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Patches",
+   "player": "Lucie Day",
+   "timeSeconds": 17,
+   "hints": false
+  },
+  {
+   "date": "2026-10-30",
+   "game": "Patches",
+   "player": "Sophie Evans",
+   "timeSeconds": 44,
    "hints": false
   }
  ]
