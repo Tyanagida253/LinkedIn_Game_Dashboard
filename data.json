@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02T21:43+00:00",
+ "updatedAt": "2026-11-08T20:46+00:00",
  "scores": [
   {
    "date": "2026-10-17",
@@ -1925,6 +1925,118 @@
    "player": "Tyler Yanagida",
    "timeSeconds": 8,
    "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Queens",
+   "player": "Lucie Day",
+   "timeSeconds": 43,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Queens",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 88,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Queens",
+   "player": "Sophie Evans",
+   "timeSeconds": 170,
+   "hints": true
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Tango",
+   "player": "Lucie Day",
+   "timeSeconds": 36,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Tango",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 37,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Tango",
+   "player": "Sophie Evans",
+   "timeSeconds": 59,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Zip",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 12,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Zip",
+   "player": "Lucie Day",
+   "timeSeconds": 13,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Zip",
+   "player": "Sophie Evans",
+   "timeSeconds": 18,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Mini Sudoku",
+   "player": "Lucie Day",
+   "timeSeconds": 71,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Mini Sudoku",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 108,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Wend",
+   "player": "Lucie Day",
+   "timeSeconds": 94,
+   "hints": true
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Wend",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 207,
+   "hints": true
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Patches",
+   "player": "Tyler Yanagida",
+   "timeSeconds": 16,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Patches",
+   "player": "Sophie Evans",
+   "timeSeconds": 38,
+   "hints": false
+  },
+  {
+   "date": "2026-11-08",
+   "game": "Patches",
+   "player": "Lucie Day",
+   "timeSeconds": 72,
+   "hints": true
   }
  ]
 }
